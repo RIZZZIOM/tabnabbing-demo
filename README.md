@@ -23,3 +23,7 @@ demo-lab/
     ├── meta-refresh.html                # no-JS <meta refresh> variant
     └── meta-refresh-target.html         # its redirect target
 ```
+
+---
+
+**READ THE BLOG**: https://ziomsec.com/blog/
