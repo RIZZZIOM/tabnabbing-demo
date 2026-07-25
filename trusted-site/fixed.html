@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>trusted-site.com — Community Board (fixed)</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 640px; margin: 60px auto; color: #222; }
+    .badge { background: #eaf4ee; color: #2f6f4f; padding: 4px 10px; border-radius: 4px; font-size: 12px; }
+    .post { border: 1px solid #ddd; border-radius: 8px; padding: 16px; margin-top: 20px; }
+    a.outbound { color: #2f6f4f; font-weight: bold; }
+    button { background: #2f6f4f; color: #fff; border: 0; padding: 8px 14px; border-radius: 4px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <span class="badge">trusted-site.com</span>
+  <h2>Community Board</h2>
+  <p>You're logged in. This tab will stay open in the background while you browse.</p>
+
+  <div class="post">
+    <p><strong>user123:</strong> Hey, check out this resource a client sent over, might be useful for the project:</p>
+
+    <!-- FIXED: rel="noopener noreferrer" strips the window.opener reference -->
+    <p><a class="outbound" href="http://127.0.0.1:8001/malicious.html" target="_blank" rel="noopener noreferrer">
+      Open shared resource ↗
+    </a></p>
+
+    <!-- FIXED: "noopener,noreferrer" passed as window features to window.open() -->
+    <p><button onclick="window.open('http://127.0.0.1:8001/malicious.html', '_blank', 'noopener,noreferrer')">
+      Open via button (window.open)
+    </button></p>
+  </div>
+</body>
+</html>

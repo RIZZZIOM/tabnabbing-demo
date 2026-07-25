@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>trusted-site.com</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 420px; margin: 80px auto; color: #222; }
+    .badge { background: #fbe9e7; color: #b3331d; padding: 4px 10px; border-radius: 4px; font-size: 12px; }
+    h2 { margin-top: 20px; }
+    input { width: 100%; padding: 8px; margin: 6px 0 14px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
+    button { background: #2f6f4f; color: #fff; border: 0; padding: 10px 16px; border-radius: 4px; width: 100%; cursor: pointer; }
+    .captured { margin-top: 20px; padding: 12px; background: #111; color: #0f0; font-family: monospace; font-size: 12px; border-radius: 6px; display: none; white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+  <span class="badge">⚠ demo phishing clone — 127.0.0.1:8002</span>
+  <h2>Session expired. Please sign in again.</h2>
+  <form id="loginForm">
+    <label>Email</label>
+    <input type="email" id="email" placeholder="you@example.com" required>
+    <label>Password</label>
+    <input type="password" id="password" placeholder="••••••••" required>
+    <button type="submit">Sign in</button>
+  </form>
+
+  <pre id="captured" class="captured"></pre>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const record = `[DEMO ONLY - not transmitted]\nemail: ${email}\npassword: ${password}`;
+      console.log(record);
+      const box = document.getElementById('captured');
+      box.style.display = 'block';
+      box.textContent = record;
+    });
+  </script>
+</body>
+</html>
