@@ -10,7 +10,7 @@ This is a self contained lab to demonstrate both attacks in action. This lab is 
 
 ```
 demo-lab/
-├── run-lab.sh                          # starts the 3 servers below
+├── run-lab.sh                          # starts the 4 servers below
 ├── trusted-site/
 │   ├── vulnerable.html                 # reverse tab nabbing: unfixed
 │   └── fixed.html                      # reverse tab nabbing: remediated
