@@ -26,4 +26,4 @@ demo-lab/
 
 ---
 
-**READ THE BLOG**: https://ziomsec.com/blog/
+**READ THE BLOG [HERE](https://ziomsec.com/blog/tab-nabbing/)**
